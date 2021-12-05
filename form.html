@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/clinet.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form id="mittFormular" action="/formInput" method="post">
+      <fieldset>
+        <legend>Gästbok</legend>
+        <label for="name">Namne :</label><br />
+        <input type="text" id="nameInput" name="nameInput" /><br />
+        <label for="tel">Telefon :</label><br />
+        <input type="text" id="telInput" name="telInput" /><br />
+        <label for="adress"> Adress :</label><br />
+        <input type="text" id="adressInput" name="adressInput" /><br />
+        <div class="mejl">
+          <label for="email">E-post :</label><br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="skriv din E-post"
+          />
+          <!-- <small class="form-text"><br> Vi delar inte din e-post med tredje part.</small> -->
+        </div>
+
+        <label>skriv din Kommentar </label><br />
+        <textarea
+          id="meddelande"
+          name="meddelande"
+          placeholder="här kan du skriva"
+          required
+        ></textarea>
+
+        <br />
+        <input type="submit" id="sendform" value="skicka" />
+        <!-- <input class="btn" onclick="getNamn();" type="submit" value="sabmit review" /> -->
+      </fieldset>
+    </form>
+
+    <!-- <p id="output1"></p> -->
+    <!-- <p id="output2"></p> -->
+    <!-- <p id="mingestContent"></p>
+    <p id="output2"></p> -->
+    <!-- <script src="index.js"></script> -->
+  </body>
+</html>
