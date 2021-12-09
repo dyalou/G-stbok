@@ -1,0 +1,24 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#sendform {
+  background-color: #ec827a;
+  border-radius: 8px;
+  font-size: 20px;
+  color: rgb(49, 49, 49);
+}
+
+#mittFormular {
+  display: grid;
+  background-color: #a4f9fc;
+  color: black;
+  padding: 25px;
+}
+
+#output {
+  display: grid;
+  padding: 25px;
+  background-color: #339ca0;
+  color: black;
+}
