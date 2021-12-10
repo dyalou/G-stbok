@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const XMLHttpRequest = require("xhr2");
-const xhr = new XMLHttpRequest();
 
 //starta serven på localhost 3000
 app.listen(3000);
@@ -17,31 +15,34 @@ console.log(besok);
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/form.html");
 });
-
-// en express.urlendecoded for post
-app.use(express.urlencoded({ extended: true }));
+app.get("/meddelande.json", (req, res) => {
+  res.send(JSON.stringify(besok));
+});
+// för att kunna läsa foemen från kroppen i ett post-meddelande från klienten
+app.use(express.json());
 app.post("/skriv-fran-mall", (req, res) => {
-  // skriva till fil från formulär
+  // skriva till fil från formulär och lägg till ett nytt element som klienten har sckickat
 
   let newMessage = {
-    name: req.body.nameInput,
-    tel: req.body.telInput,
-    adress: req.body.adressInput,
-    email: req.body.email,
-    meddelande: req.body.meddelande,
+    name: req.body.name.replace(/</g, "&lt;"),
+    tel: req.body.tel.replace(/</g, "&lt;"),
+    adress: req.body.adress.replace(/</g, "&lt;"),
+    email: req.body.email.replace(/</g, "&lt;"),
+    meddelande: req.body.meddelande.replace(/</g, "&lt;"),
   };
-
+  //busha ut varje message vi får till de övriga
   besok.push(newMessage);
   fs.writeFileSync("meddelande.json", JSON.stringify(besok, null, 4));
-
-  res.redirect("/lista");
+  res.send();
 });
+
 app.get("/lista", (req, res) => {
   const besok = JSON.parse(fs.readFileSync("meddelande.json"));
   console.log("before  inner html here");
   fs.writeFileSync("meddelande.json", JSON.stringify(besok, null, 4));
-
+  //skicka till klienten
   let messagSträng = "";
+
   for (i in besok) {
     messagSträng += "<br>";
     messagSträng += "name:" + besok[i].name;
@@ -54,9 +55,9 @@ app.get("/lista", (req, res) => {
     messagSträng += "<br>";
     messagSträng += "Meddelande: " + besok[i].meddelande;
     messagSträng += "<br>";
-    messagSträng += "----------------------------------------";
+    messagSträng += "_______________________________________";
     messagSträng += "<br>";
   }
 
-  res.send(messagSträng);
+  res.send();
 });
